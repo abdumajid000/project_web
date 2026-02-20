@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Register</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand">Topilmalar idorasi</div>
+      <div class="nav-links">
+        <a data-nav="/">Bosh sahifa</a>
+        <a data-nav="/auth">Kirish</a>
+      </div>
+      <button id="theme-toggle" class="secondary small-btn" type="button">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero"><h1>Kirish va ro'yxatdan o'tish</h1><p>Telefon + Telegram kod + parol orqali kirish.</p></section>
+
+    <section class="card">
+      <h3>1) Kod olish</h3>
+      <div class="row">
+        <div><label>Telefon</label><input id="phone" placeholder="+998901234567" /></div>
+        <div><label>Telegram ID</label><input id="telegram-id" placeholder="123456789" /></div>
+      </div>
+      <div class="actions"><button id="send-code">Kod yuborish</button></div>
+    </section>
+
+    <section class="card">
+      <h3>2) Kodni tasdiqlash</h3>
+      <div class="row">
+        <div><label>To'liq ism</label><input id="full-name" placeholder="Ali Valiyev" /></div>
+        <div><label>Kod</label><input id="code" placeholder="6 xonali kod" /></div>
+      </div>
+      <div class="actions"><button id="verify-code">Kod tasdiqlash</button></div>
+    </section>
+
+    <section class="card">
+      <h3>3) Parol o'rnatish (birinchi marta)</h3>
+      <label>Parol</label><input id="set-password" type="password" />
+      <div class="actions"><button id="save-password">Parol saqlash</button></div>
+    </section>
+
+    <section class="card">
+      <h3>4) Login</h3>
+      <label>Parol</label><input id="login-password" type="password" />
+      <div class="actions"><button id="login-btn">Kirish</button></div>
+    </section>
+
+    <section class="card">
+      <h3>Parolni unutdingizmi?</h3>
+      <div class="actions">
+        <button class="secondary" id="forgot-send">Tiklash kodi yuborish</button>
+      </div>
+      <div class="row">
+        <div><label>Tiklash kodi</label><input id="reset-code" /></div>
+        <div><label>Yangi parol</label><input id="reset-pass" type="password" /></div>
+      </div>
+      <div class="actions"><button class="secondary" id="reset-btn">Parolni yangilash</button></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

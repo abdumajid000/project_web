@@ -1,14 +1,18 @@
 setupBaseUI();
+if (!requireAuth('/admin/login')) throw new Error("Auth required");
 
 const listEl = document.getElementById("pending-list");
-const adminIdInput = document.getElementById("admin-id");
 const adminSearch = document.getElementById("admin-search");
 const catNameInput = document.getElementById("new-category");
 const categoryMsg = document.getElementById("cat-message");
 let pendingItems = [];
 
-function getAdminId() {
-  return adminIdInput.value.trim();
+async function checkAdmin() {
+  const me = await fetchJSON('/auth/me', { headers: authHeaders() });
+  if (!me.is_admin) {
+    showToast("Admin ruxsati yo'q");
+    setTimeout(() => { window.location.href = '/admin/login'; }, 400);
+  }
 }
 
 function renderPending(items) {
@@ -17,7 +21,6 @@ function renderPending(items) {
     listEl.innerHTML = '<div class="card">Pending e\'lon yo\'q.</div>';
     return;
   }
-
   items.forEach((item) => {
     const card = document.createElement("article");
     card.className = "item-card";
@@ -29,7 +32,7 @@ function renderPending(items) {
         <span class="badge">${item.region}</span>
       </div>
       <p>${item.description}</p>
-      <div class="meta">Owner telegram_id: ${item.telegram_id}</div>
+      <div class="meta">Owner telegram_id: ${item.telegram_id || '-'}</div>
       <div class="meta">Contact: ${item.contact}</div>
       <div class="actions">
         <button data-approve="${item.id}">Tasdiqlash</button>
@@ -47,14 +50,8 @@ function applySearch() {
 }
 
 async function loadPending() {
-  const telegram_id = getAdminId();
-  if (!telegram_id) {
-    listEl.innerHTML = '<div class="card">Admin telegram_id kiriting.</div>';
-    return;
-  }
-
   listEl.innerHTML = '<div class="card muted">Yuklanmoqda...</div>';
-  pendingItems = await fetchJSON(`${API}/admin/pending?telegram_id=${encodeURIComponent(telegram_id)}`);
+  pendingItems = await fetchJSON(`${API}/admin/pending`, { headers: authHeaders() });
   applySearch();
 }
 
@@ -67,16 +64,12 @@ adminSearch.addEventListener("input", applySearch);
 document.getElementById("add-category").addEventListener("click", async () => {
   categoryMsg.textContent = "";
   try {
-    const telegram_id = getAdminId();
-    if (!telegram_id) throw new Error("Avval admin telegram_id kiriting");
     if (!catNameInput.value.trim()) throw new Error("Kategoriya nomini kiriting");
-
-    const res = await fetchJSON(`${API}/admin/categories?telegram_id=${encodeURIComponent(telegram_id)}`, {
+    const res = await fetchJSON(`${API}/admin/categories`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify({ name: catNameInput.value.trim() }),
     });
-
     categoryMsg.textContent = `Qo'shildi: ${res.name}`;
     categoryMsg.className = "success";
     catNameInput.value = "";
@@ -90,21 +83,14 @@ document.getElementById("add-category").addEventListener("click", async () => {
 listEl.addEventListener("click", async (e) => {
   const approveId = e.target.getAttribute("data-approve");
   const deleteId = e.target.getAttribute("data-delete");
-  const adminId = getAdminId();
-
-  if (!adminId) {
-    showToast("Avval admin telegram_id kiriting");
-    return;
-  }
-
   try {
     if (approveId) {
-      await fetchJSON(`${API}/admin/approve/${approveId}?telegram_id=${encodeURIComponent(adminId)}`, { method: "POST" });
+      await fetchJSON(`${API}/admin/approve/${approveId}`, { method: "POST", headers: authHeaders() });
       showToast("E'lon tasdiqlandi");
       await loadPending();
     }
     if (deleteId) {
-      await fetchJSON(`${API}/admin/delete/${deleteId}?telegram_id=${encodeURIComponent(adminId)}`, { method: "DELETE" });
+      await fetchJSON(`${API}/admin/delete/${deleteId}`, { method: "DELETE", headers: authHeaders() });
       showToast("E'lon o'chirildi");
       await loadPending();
     }
@@ -112,3 +98,5 @@ listEl.addEventListener("click", async (e) => {
     showToast(err.message);
   }
 });
+
+checkAdmin().catch((e) => showToast(e.message));

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand">Topilmalar idorasi</div>
+      <div class="nav-links">
+        <a data-nav="/">Bosh sahifa</a>
+        <a data-nav="/auth">Oddiy kirish</a>
+      </div>
+      <button id="theme-toggle" class="secondary small-btn" type="button">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero"><h1>Admin kirish</h1><p>Faqat admin huquqli akkaunt bu bo'limga kiradi.</p></section>
+    <section class="card">
+      <label>Telefon</label><input id="admin-phone" placeholder="+998901234567" />
+      <label>Parol</label><input id="admin-password" type="password" />
+      <div class="actions"><button id="admin-login-btn">Admin panelga kirish</button></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/admin_login.js"></script>
+</body>
+</html>

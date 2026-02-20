@@ -1,4 +1,5 @@
 setupBaseUI();
+if (!requireAuth()) throw new Error("Auth required");
 
 const form = document.getElementById("create-form");
 const messageEl = document.getElementById("form-message");
@@ -47,24 +48,10 @@ desc.addEventListener("input", () => {
   saveDraft();
 });
 
-["title", "contact"].forEach((id) => {
-  document.getElementById(id).addEventListener("input", saveDraft);
-});
+["title", "contact"].forEach((id) => document.getElementById(id).addEventListener("input", saveDraft));
 categorySelect.addEventListener("change", saveDraft);
 regionSelect.addEventListener("change", saveDraft);
 form.querySelectorAll('input[name="type"]').forEach((r) => r.addEventListener("change", saveDraft));
-
-async function ensureUser() {
-  const telegram_id = getTelegramId();
-  const full_name = getFullName() || "Telegram User";
-  if (!telegram_id) throw new Error("URL ichida telegram_id bo'lishi shart");
-
-  await fetchJSON(`${API}/users`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ telegram_id, full_name }),
-  });
-}
 
 async function loadCategories() {
   const categories = await fetchJSON(`${API}/categories`);
@@ -80,9 +67,7 @@ async function loadCategories() {
 function validate(formData) {
   const required = ["title", "description", "category", "region", "contact"];
   for (const field of required) {
-    if (!String(formData.get(field) || "").trim()) {
-      throw new Error(`"${field}" maydoni to'ldirilishi kerak`);
-    }
+    if (!String(formData.get(field) || "").trim()) throw new Error(`"${field}" maydoni to'ldirilishi kerak`);
   }
   if (!formData.get("type")) throw new Error("Yo'qolgan/Topilgan turini tanlang");
 }
@@ -91,15 +76,12 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   messageEl.textContent = "";
   messageEl.className = "";
-
   try {
     submitBtn.disabled = true;
     submitBtn.textContent = "Yuborilmoqda...";
 
     const formData = new FormData(form);
     validate(formData);
-    await ensureUser();
-
     const payload = {
       title: String(formData.get("title")).trim(),
       description: String(formData.get("description")).trim(),
@@ -107,12 +89,11 @@ form.addEventListener("submit", async (e) => {
       region: String(formData.get("region")).trim(),
       type: formData.get("type"),
       contact: String(formData.get("contact")).trim(),
-      telegram_id: getTelegramId(),
     };
 
     const result = await fetchJSON(`${API}/items`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify(payload),
     });
 

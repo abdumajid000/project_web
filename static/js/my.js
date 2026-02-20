@@ -1,4 +1,5 @@
 setupBaseUI();
+if (!requireAuth()) throw new Error("Auth required");
 
 const listEl = document.getElementById("my-list");
 const searchEl = document.getElementById("my-search");
@@ -11,7 +12,6 @@ function render(items) {
     listEl.innerHTML = '<div class="card">Sizda mos e\'lon topilmadi.</div>';
     return;
   }
-
   items.forEach((item) => {
     const card = document.createElement("article");
     card.className = "item-card";
@@ -40,14 +40,8 @@ function applyFilter() {
 }
 
 async function loadMine() {
-  const telegram_id = getTelegramId();
-  if (!telegram_id) {
-    listEl.innerHTML = '<div class="card error">URL ichida telegram_id kerak</div>';
-    return;
-  }
-
   listEl.innerHTML = '<div class="card muted">Yuklanmoqda...</div>';
-  itemsRaw = await fetchJSON(`${API}/items/my?telegram_id=${encodeURIComponent(telegram_id)}`);
+  itemsRaw = await fetchJSON(`${API}/items/my`, { headers: authHeaders() });
   applyFilter();
 }
 

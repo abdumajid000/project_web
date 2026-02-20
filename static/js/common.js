@@ -11,6 +11,39 @@ function getFullName() {
   return params.get("full_name") || "";
 }
 
+function getAuthToken() {
+  return localStorage.getItem("lf_token") || "";
+}
+
+function setAuthToken(token) {
+  localStorage.setItem("lf_token", token);
+}
+
+function clearAuth() {
+  localStorage.removeItem("lf_token");
+  localStorage.removeItem("lf_user");
+}
+
+function getUserInfo() {
+  const raw = localStorage.getItem("lf_user");
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function setUserInfo(info) {
+  localStorage.setItem("lf_user", JSON.stringify(info));
+}
+
+function authHeaders(extra = {}) {
+  const token = getAuthToken();
+  if (!token) return extra;
+  return { ...extra, Authorization: `Bearer ${token}` };
+}
+
 function linkWithQuery(path) {
   const telegram_id = getTelegramId();
   const full_name = getFullName();
@@ -30,16 +63,14 @@ function setupNavLinks() {
 function setupActiveNav() {
   const current = window.location.pathname;
   document.querySelectorAll("[data-nav]").forEach((a) => {
-    if (a.getAttribute("data-nav") === current) {
-      a.classList.add("active-link");
-    }
+    if (a.getAttribute("data-nav") === current) a.classList.add("active-link");
   });
 }
 
 function setupKeyboardShortcuts() {
   document.addEventListener("keydown", (e) => {
     if (!e.altKey) return;
-    const map = { "1": "/", "2": "/create", "3": "/my", "4": "/admin" };
+    const map = { "1": "/", "2": "/create", "3": "/my", "4": "/admin/login" };
     const path = map[e.key];
     if (!path) return;
     window.location.href = linkWithQuery(path);
@@ -79,13 +110,11 @@ function showToast(message) {
 function setupThemeToggle() {
   const btn = document.getElementById("theme-toggle");
   if (!btn) return;
-
   const saved = localStorage.getItem("lf_theme");
   if (saved === "dark") {
     document.body.classList.add("dark");
     btn.textContent = "☀️";
   }
-
   btn.addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
@@ -99,4 +128,12 @@ function setupBaseUI() {
   setupActiveNav();
   setupThemeToggle();
   setupKeyboardShortcuts();
+}
+
+function requireAuth(redirect = "/auth") {
+  if (!getAuthToken()) {
+    window.location.href = linkWithQuery(redirect);
+    return false;
+  }
+  return true;
 }
