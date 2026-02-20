@@ -80,6 +80,11 @@ def auth_page():
     return FileResponse(BASE_DIR / "static" / "auth.html")
 
 
+@app.get("/login")
+def login_page():
+    return FileResponse(BASE_DIR / "static" / "login.html")
+
+
 @app.get("/admin/login")
 def admin_login_page():
     return FileResponse(BASE_DIR / "static" / "admin_login.html")

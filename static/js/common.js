@@ -130,7 +130,7 @@ function setupBaseUI() {
   setupKeyboardShortcuts();
 }
 
-function requireAuth(redirect = "/auth") {
+function requireAuth(redirect = "/login") {
   if (!getAuthToken()) {
     window.location.href = linkWithQuery(redirect);
     return false;

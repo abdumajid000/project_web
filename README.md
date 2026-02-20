@@ -15,12 +15,12 @@ Professional MVP web application for lost/found announcements (Telegram Mini App
 - Category management
 
 ## New authentication flow (phone + Telegram code)
-1. User opens `/auth`
+1. User opens `/auth` (register window)
 2. Enters phone + telegram_id and requests code
 3. Code is sent by Telegram bot (`TELEGRAM_BOT_TOKEN` required)
 4. User verifies code and sets password once
-5. Next logins use only phone + password
-6. Telegram code is required again only for password reset
+5. User logs in from separate professional login window `/login`
+6. Telegram code is required again only for password reset (forgot password)
 
 ## Environment variables
 - `ADMIN_PHONE` (admin phone, default: `+998900000000`)
@@ -49,7 +49,8 @@ Professional MVP web application for lost/found announcements (Telegram Mini App
    ```
 4. Open pages:
    - Home: `http://127.0.0.1:8000/`
-   - Auth: `http://127.0.0.1:8000/auth`
+   - Register: `http://127.0.0.1:8000/auth`
+   - Login: `http://127.0.0.1:8000/login`
    - Create: `http://127.0.0.1:8000/create`
    - My: `http://127.0.0.1:8000/my`
    - Admin login: `http://127.0.0.1:8000/admin/login`
