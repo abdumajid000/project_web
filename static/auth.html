@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Login</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-brand">
+      <h1>Topilmalar idorasi</h1>
+      <p>Professional kirish oynasi: xavfsiz, tezkor va qulay.</p>
+      <ul>
+        <li>📱 Telefon orqali kirish</li>
+        <li>🤖 Telegram kod tasdiqlash</li>
+        <li>🔒 Kuchli parol himoyasi</li>
+      </ul>
+      <a class="auth-back" href="/">← Bosh sahifaga qaytish</a>
+    </section>
+
+    <section class="auth-panel card">
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-tab="login">Login</button>
+        <button class="tab-btn" data-tab="register">Ro'yxatdan o'tish</button>
+        <button class="tab-btn" data-tab="reset">Parolni tiklash</button>
+      </div>
+
+      <div class="tab-content" id="tab-login">
+        <h3>Kirish</h3>
+        <label>Telefon</label>
+        <input id="login-phone" placeholder="+998901234567" />
+        <label>Parol</label>
+        <input id="login-password" type="password" placeholder="Parolingiz" />
+        <button id="login-btn">Kirish</button>
+      </div>
+
+      <div class="tab-content hidden" id="tab-register">
+        <h3>Ro'yxatdan o'tish</h3>
+        <label>To'liq ism</label>
+        <input id="full-name" placeholder="Ali Valiyev" />
+        <label>Telefon</label>
+        <input id="reg-phone" placeholder="+998901234567" />
+        <label>Telegram ID</label>
+        <input id="telegram-id" placeholder="123456789" />
+        <div class="actions">
+          <button id="send-code">Kod yuborish</button>
+        </div>
+        <label>Tasdiqlash kodi</label>
+        <input id="verify-code" placeholder="6 xonali kod" />
+        <label>Yangi parol</label>
+        <input id="set-password" type="password" placeholder="Parol yarating" />
+        <button id="verify-and-save">Tasdiqlash va saqlash</button>
+      </div>
+
+      <div class="tab-content hidden" id="tab-reset">
+        <h3>Parolni tiklash</h3>
+        <label>Telefon</label>
+        <input id="reset-phone" placeholder="+998901234567" />
+        <label>Telegram ID</label>
+        <input id="reset-telegram" placeholder="123456789" />
+        <div class="actions">
+          <button class="secondary" id="forgot-send">Tiklash kodi yuborish</button>
+        </div>
+        <label>Kod</label>
+        <input id="reset-code" placeholder="6 xonali kod" />
+        <label>Yangi parol</label>
+        <input id="reset-pass" type="password" placeholder="Yangi parol" />
+        <button class="secondary" id="reset-btn">Parolni yangilash</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>
