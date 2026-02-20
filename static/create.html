@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create announcement</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand">Topilmalar idorasi</div>
+      <div class="nav-links">
+        <a data-nav="/">Bosh sahifa</a>
+        <a data-nav="/create">E'lon berish</a>
+        <a data-nav="/my">Mening e'lonlarim</a>
+        <a data-nav="/login">Kirish</a>
+        <a data-nav="/admin/login">Admin panel</a>
+      </div>
+      <button id="theme-toggle" class="secondary small-btn" type="button">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Yangi e'lon yaratish</h1>
+      <p>Majburiy maydonlarni to'ldiring. E'lon avval admin tomonidan tasdiqlanadi.</p>
+    </section>
+
+    <form id="create-form" class="card">
+      <label for="title">Buyum nomi *</label>
+      <input id="title" name="title" maxlength="150" required />
+
+      <label for="description">Tavsif *</label>
+      <textarea id="description" name="description" required></textarea>
+      <div class="inline-help" id="desc-count">0 ta belgi</div>
+      <div class="hint-box">Qoralama avtomatik saqlanadi (shu qurilmada).</div>
+
+      <label for="category">Kategoriya *</label>
+      <select id="category" name="category" required>
+        <option value="">Tanlang</option>
+      </select>
+
+      <label for="region">Hudud *</label>
+      <select id="region" name="region" required>
+        <option value="">Tanlang</option>
+      </select>
+
+      <label>Turi *</label>
+      <div class="type-options">
+        <label><input type="radio" name="type" value="lost" /> Yo'qolgan</label>
+        <label><input type="radio" name="type" value="found" /> Topilgan</label>
+      </div>
+
+      <label for="contact">Aloqa uchun *</label>
+      <input id="contact" name="contact" required />
+
+      <button id="submit-btn" type="submit">Yuborish</button>
+      <div id="form-message"></div>
+    </form>
+  </main>
+
+  <footer class="footer">Lost & Found – Topilmalar idorasi • Professional MVP</footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/create.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-window">
+      <div class="auth-brand">Topilmalar idorasi</div>
+      <h1>Kirish</h1>
+      <p class="muted">Professional va xavfsiz kirish oynasi</p>
+
+      <label for="login-phone">Telefon raqam</label>
+      <input id="login-phone" placeholder="+998901234567" />
+
+      <label for="login-password">Parol</label>
+      <input id="login-password" type="password" placeholder="Parolingiz" />
+
+      <button id="login-btn">Kirish</button>
+
+      <div class="auth-links">
+        <a href="/auth">Ro'yxatdan o'tish</a>
+        <a href="/admin/login">Admin kirish</a>
+      </div>
+
+      <hr />
+      <h3>Parolni unutdingizmi?</h3>
+      <label for="fp-telegram">Telegram ID</label>
+      <input id="fp-telegram" placeholder="123456789" />
+      <button id="fp-send" class="secondary">Telegramga kod yuborish</button>
+      <label for="fp-code">Kod</label>
+      <input id="fp-code" placeholder="6 xonali" />
+      <label for="fp-pass">Yangi parol</label>
+      <input id="fp-pass" type="password" />
+      <button id="fp-reset" class="secondary">Parolni yangilash</button>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/login.js"></script>
+</body>
+</html>

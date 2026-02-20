@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-window">
+      <div class="auth-brand">Topilmalar idorasi</div>
+      <h1>Ro'yxatdan o'tish</h1>
+      <p class="muted">Telefon + Telegram tasdiqlash kodi orqali</p>
+
+      <label>Telefon raqam</label>
+      <input id="phone" placeholder="+998901234567" />
+
+      <label>Telegram ID</label>
+      <input id="telegram-id" placeholder="123456789" />
+
+      <label>To'liq ism</label>
+      <input id="full-name" placeholder="Ali Valiyev" />
+
+      <div class="actions">
+        <button id="send-code">Kod yuborish</button>
+      </div>
+
+      <label>Kod</label>
+      <input id="code" placeholder="6 xonali kod" />
+      <button id="verify-code" class="secondary">Kod tasdiqlash</button>
+
+      <label>Yangi parol</label>
+      <input id="set-password" type="password" />
+      <button id="save-password">Ro'yxatdan o'tishni yakunlash</button>
+
+      <div class="auth-links">
+        <a href="/login">Login oynasiga qaytish</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

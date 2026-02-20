@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-window">
+      <div class="auth-brand">Topilmalar idorasi</div>
+      <h1>Admin kirish oynasi</h1>
+      <p class="muted">Faqat admin akkauntlar uchun</p>
+
+      <label>Telefon</label><input id="admin-phone" placeholder="+998901234567" />
+      <label>Parol</label><input id="admin-password" type="password" />
+      <button id="admin-login-btn">Admin panelga kirish</button>
+
+      <div class="auth-links">
+        <a href="/login">Oddiy kirish</a>
+        <a href="/">Bosh sahifa</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/admin_login.js"></script>
+</body>
+</html>
