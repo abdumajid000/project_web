@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My announcements</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand">Topilmalar idorasi</div>
+      <div class="nav-links">
+        <a data-nav="/">Bosh sahifa</a>
+        <a data-nav="/create">E'lon berish</a>
+        <a data-nav="/my">Mening e'lonlarim</a>
+        <a data-nav="/admin">Admin panel</a>
+      </div>
+      <button id="theme-toggle" class="secondary small-btn" type="button">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Mening e'lonlarim</h1>
+      <p>Statuslarni kuzating: pending yoki approved.</p>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <div>
+          <label for="my-search">Qidiruv</label>
+          <input id="my-search" placeholder="Sarlavha bo'yicha..." />
+        </div>
+        <div>
+          <label for="my-status">Status</label>
+          <select id="my-status">
+            <option value="">Hammasi</option>
+            <option value="pending">pending</option>
+            <option value="approved">approved</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section id="my-list"></section>
+  </main>
+
+  <footer class="footer">Lost & Found – Topilmalar idorasi • Professional MVP</footer>
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/my.js"></script>
+</body>
+</html>

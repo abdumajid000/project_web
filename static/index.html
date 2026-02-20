@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost & Found – Topilmalar idorasi</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand">Topilmalar idorasi</div>
+      <div class="nav-links">
+        <a data-nav="/">Bosh sahifa</a>
+        <a data-nav="/create">E'lon berish</a>
+        <a data-nav="/my">Mening e'lonlarim</a>
+        <a data-nav="/admin">Admin panel</a>
+      </div>
+      <button id="theme-toggle" class="secondary small-btn" type="button">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Lost & Found – Topilmalar idorasi</h1>
+      <p>Eng muhim e'lonlarni bir joyda toping. Tez qidiruv, qulay filtr va jonli interfeys.</p>
+      <div class="stats-grid">
+        <div class="metric"><span id="metric-total">0</span><small>Jami e'lon</small></div>
+        <div class="metric"><span id="metric-lost">0</span><small>Yo'qolgan</small></div>
+        <div class="metric"><span id="metric-found">0</span><small>Topilgan</small></div>
+      </div>
+    </section>
+
+    <section class="card controls">
+      <div class="row">
+        <div>
+          <label for="search-filter">Qidiruv</label>
+          <input id="search-filter" placeholder="Sarlavha yoki tavsif..." />
+        </div>
+        <div>
+          <label for="region-filter">Viloyat</label>
+          <select id="region-filter"></select>
+        </div>
+        <div>
+          <label for="type-filter">Turi</label>
+          <select id="type-filter">
+            <option value="">Hammasi</option>
+            <option value="lost">Yo'qolgan</option>
+            <option value="found">Topilgan</option>
+          </select>
+        </div>
+        <div>
+          <label for="sort-filter">Saralash</label>
+          <select id="sort-filter">
+            <option value="new">Eng yangi</option>
+            <option value="old">Eng eski</option>
+            <option value="title">Nomi bo'yicha</option>
+          </select>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="filter-btn" type="button">Filtrlash</button>
+        <button id="clear-btn" type="button" class="secondary">Tozalash</button>
+      </div>
+      <div class="chips" id="quick-regions"></div>
+      <div class="stats">
+        <span class="badge" id="count-badge">0 ta e'lon</span>
+      </div>
+      <div class="hint-box">Klaviatura: Alt+1 Bosh sahifa, Alt+2 E'lon berish, Alt+3 Mening e'lonlarim, Alt+4 Admin panel.</div>
+    </section>
+
+    <section class="items-wrap" id="items-list"></section>
+  </main>
+
+  <footer class="footer">Lost & Found – Topilmalar idorasi • Professional MVP</footer>
+
+  <dialog id="item-modal" class="item-modal">
+    <div class="item-modal-body">
+      <button id="modal-close" class="danger small-btn" type="button">✕</button>
+      <h3 id="modal-title"></h3>
+      <div class="stats" id="modal-tags"></div>
+      <p id="modal-description"></p>
+      <div class="meta" id="modal-contact"></div>
+      <button id="copy-contact" type="button">Kontaktni nusxalash</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/home.js"></script>
+</body>
+</html>

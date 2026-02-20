@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin panel</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand">Topilmalar idorasi</div>
+      <div class="nav-links">
+        <a data-nav="/">Bosh sahifa</a>
+        <a data-nav="/create">E'lon berish</a>
+        <a data-nav="/my">Mening e'lonlarim</a>
+        <a data-nav="/admin">Admin panel</a>
+      </div>
+      <button id="theme-toggle" class="secondary small-btn" type="button">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Admin panel</h1>
+      <p>Pending e'lonlarni ko'ring, tasdiqlang yoki o'chiring. Kategoriya qo'shing.</p>
+    </section>
+
+    <div class="card">
+      <div class="row">
+        <div>
+          <label for="admin-id">Admin telegram_id *</label>
+          <input id="admin-id" placeholder="Masalan: 123456789" />
+        </div>
+        <div>
+          <label for="admin-search">Pending qidiruv</label>
+          <input id="admin-search" placeholder="Sarlavha bo'yicha..." />
+        </div>
+      </div>
+      <div class="actions">
+        <button id="load-pending">Pending e'lonlarni yuklash</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Yangi kategoriya</h2>
+      <input id="new-category" placeholder="Kategoriya nomi" />
+      <button id="add-category">Kategoriya qo'shish</button>
+      <div id="cat-message"></div>
+    </div>
+
+    <section id="pending-list"></section>
+  </main>
+
+  <footer class="footer">Lost & Found – Topilmalar idorasi • Professional MVP</footer>
+  <div id="toast" class="toast"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/admin.js"></script>
+</body>
+</html>
